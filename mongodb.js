@@ -3,7 +3,7 @@ const { MongoClient } = require("mongodb");
 const dbName = "tasks-manager";
 const url = "mongodb://localhost:27017";
 
-const client = new MongoClient(url);
+const client = new MongoClient(url, { useNewUrlParser: true });
 
 async function main() {
   await client.connect();
