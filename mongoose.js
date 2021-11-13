@@ -5,17 +5,39 @@ const url = "mongodb://localhost:27017/test";
 async function main() {
   await mongoose.connect(url);
 
-  const taskSchema = new mongoose.Schema({
-    description: String,
-    completed: Boolean,
+  const accountSchema = new mongoose.Schema({
+    email: {
+      type: String,
+      required: true,
+      validate(value) {
+        if (!value.includes("@" && ".com")) {
+          throw new Error("Error: Invalid Email");
+        }
+      },
+    },
+    password: {
+      type: String,
+      required: true,
+      validate(value) {
+        if (
+          value.trim().length < 6 ||
+          value.toLowerCase().includes("password")
+        ) {
+          throw new Error("Error: Invalid Password");
+        }
+      },
+    },
   });
 
-  const Task = mongoose.model("Task", taskSchema);
+  const Account = mongoose.model("Task", accountSchema);
 
-  const task1 = new Task({ description: "Going home", completed: true });
-  return await task1.save();
+  const account1 = new Account({
+    email: "k@yahoo.com",
+    password: "1234567",
+  });
+  return await account1.save();
 }
 
 main()
   .then((task1) => console.log(task1))
-  .catch(() => console.error);
+  .catch((error) => console.log(error));
