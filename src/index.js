@@ -1,7 +1,7 @@
 const express = require("express");
 const { main } = require("./database/mongoose");
 const userSchema = require("./models/users");
-const mongoose = require("mongoose");
+const taskSchema = require("./models/tasks");
 
 const app = express();
 
@@ -14,7 +14,13 @@ app.listen(port, () => {
 app.use(express.json());
 
 app.post("/users", (req, res) => {
-  main(req.body)
-    .then((data) => res.status(200).send(data))
+  main("users", userSchema, req.body)
+    .then((data) => res.status(201).send(data))
+    .catch((error) => res.status(400).send(error));
+});
+
+app.post("/tasks", (req, res) => {
+  main("tasks", taskSchema, req.body)
+    .then((data) => res.status(201).send(data))
     .catch((error) => res.status(400).send(error));
 });

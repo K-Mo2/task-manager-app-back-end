@@ -3,14 +3,14 @@ const userSchema = require("../models/users");
 
 const url = "mongodb://localhost:27017/test";
 
-async function main(user) {
+async function main(schemaName,schema, data) {
   await mongoose.connect(url);
 
-  const User = mongoose.model("User", userSchema);
+  const User = mongoose.model(`${schemaName}`, schema);
 
-  const user1 = new User(user);
+  const dataInstance = new User(data);
 
-  return user1.save();
+  return dataInstance.save();
 }
 
 module.exports = { main };
