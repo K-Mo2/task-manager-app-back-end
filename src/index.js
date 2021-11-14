@@ -63,7 +63,7 @@ app.post("/tasks", (req, res) => {
 app.delete("/tasks", async (req, res) => {
   try {
     const modelInstance = await main("tasks", taskSchema);
-    const result = await modelInstance.findOneAndDelete({ completed: true });
+    const result = await modelInstance.findOneAndDelete(req.body);
     res.status(201).send(result);
   } catch (error) {
     res.status(404).send(error);
