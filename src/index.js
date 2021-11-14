@@ -15,7 +15,6 @@ app.use(express.json());
 
 app.post("/users", (req, res) => {
   main(req.body)
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
-  res.send(req.body);
+    .then((data) => res.status(200).send(data))
+    .catch((error) => res.status(400).send(error));
 });
