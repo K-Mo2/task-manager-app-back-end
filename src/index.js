@@ -59,3 +59,14 @@ app.post("/tasks", (req, res) => {
     })
     .catch((error) => res.status(400).send(error));
 });
+
+app.delete("/tasks", async (req, res) => {
+  try {
+    const modelInstance = await main("tasks", taskSchema);
+    const result = await modelInstance.findOneAndDelete({ completed: true });
+    res.status(201).send(result);
+  } catch (error) {
+    res.status(404).send(error);
+    throw new Error(error);
+  }
+});

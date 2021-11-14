@@ -1,20 +1,19 @@
 const mongoose = require("mongoose");
-const userSchema = require("../models/users");
 
 const url = "mongodb://localhost:27017/test";
 
 async function main(schemaName, schema, data) {
   await mongoose.connect(url);
 
-  const User = mongoose.model(`${schemaName}`, schema);
+  const Model = mongoose.model(`${schemaName}`, schema);
 
   if (!data) {
-    return User;
+    return Model;
   }
-  
-  const dataInstance = new User(data);
 
-  return dataInstance;
+  const modelInstance = new Model(data);
+
+  return modelInstance;
 }
 
 module.exports = { main };
