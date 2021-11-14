@@ -40,6 +40,17 @@ app.post("/users", (req, res) => {
     .catch((error) => res.status(400).send(error));
 });
 
+app.get("/tasks", (req, res) => {
+  main("tasks", taskSchema).then((data) => {
+    data.find({}).then((result) => {
+      if (!result) {
+        res.status(404).send("Not Found");
+      }
+      res.status(201).send(result);
+    });
+  });
+});
+
 app.post("/tasks", (req, res) => {
   main("tasks", taskSchema, req.body)
     .then((data) => {
