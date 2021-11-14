@@ -47,3 +47,5 @@ This is a project to practice the MongoDB with Mongoose
 9- REST API
 
 10- Testing with Postman
+
+11- Handling request status and bad requests
