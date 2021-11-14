@@ -1,6 +1,7 @@
 const express = require("express");
-require("./database/mongoose");
+const { main } = require("./database/mongoose");
 const userSchema = require("./models/users");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -13,5 +14,8 @@ app.listen(port, () => {
 app.use(express.json());
 
 app.post("/users", (req, res) => {
-  res.send("testing");
+  main(req.body)
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
+  res.send(req.body);
 });
