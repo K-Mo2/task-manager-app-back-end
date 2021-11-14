@@ -40,6 +40,30 @@ app.post("/users", (req, res) => {
     .catch((error) => res.status(400).send(error));
 });
 
+app.patch("/users/:userId", async (req, res) => {
+  const updates = Object.entries(req.body);
+  const allowedUpdates = ["email", "password", "task", "completed"];
+  const updateIsAllowed = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!updateIsAllowed) {
+    return res.status(400).send("Error: Invalid update");
+  }
+
+  try {
+    const id = req.params.userId;
+    const modelInstance = await main("users", userSchema);
+    const result = await modelInstance.findOneAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    !result ? new Error() : res.status(201).send(result);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
 app.delete("/users", async (req, res) => {
   try {
     const modelInstance = await main("users", userSchema);
@@ -71,26 +95,17 @@ app.post("/tasks", (req, res) => {
     .catch((error) => res.status(400).send(error));
 });
 
-app.delete("/tasks", async (req, res) => {
-  try {
-    const modelInstance = await main("tasks", taskSchema);
-    const result = await modelInstance.findOneAndDelete(req.body);
-    !result ? new Error() : res.status(201).send(result);
-  } catch (error) {
-    res.status(404).send(error);
-    throw new Error(error);
-  }
-});
-
 app.patch("/tasks/:taskId", async (req, res) => {
   const updates = Object.entries(req.body);
   const allowedUpdates = ["email", "password", "task", "completed"];
   const updateIsAllowed = updates.every((update) =>
     allowedUpdates.includes(update)
   );
+
   if (!updateIsAllowed) {
     return res.status(400).send("Error: Invalid update");
   }
+
   try {
     const id = req.params.taskId;
     const modelInstance = await main("tasks", taskSchema);
@@ -100,6 +115,17 @@ app.patch("/tasks/:taskId", async (req, res) => {
     });
     !result ? new Error() : res.status(201).send(result);
   } catch (error) {
+    throw new Error(error);
+  }
+});
+
+app.delete("/tasks", async (req, res) => {
+  try {
+    const modelInstance = await main("tasks", taskSchema);
+    const result = await modelInstance.findOneAndDelete(req.body);
+    !result ? new Error() : res.status(201).send(result);
+  } catch (error) {
+    res.status(404).send(error);
     throw new Error(error);
   }
 });
