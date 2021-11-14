@@ -40,6 +40,17 @@ app.post("/users", (req, res) => {
     .catch((error) => res.status(400).send(error));
 });
 
+app.delete("/users", async (req, res) => {
+  try {
+    const modelInstance = await main("users", userSchema);
+    const result = await modelInstance.findOneAndDelete(req.body);
+    res.status(201).send(result);
+  } catch (error) {
+    res.status(404).send(error);
+    throw new Error(error);
+  }
+});
+
 app.get("/tasks", (req, res) => {
   main("tasks", taskSchema).then((data) => {
     data.find({}).then((result) => {
@@ -64,9 +75,23 @@ app.delete("/tasks", async (req, res) => {
   try {
     const modelInstance = await main("tasks", taskSchema);
     const result = await modelInstance.findOneAndDelete(req.body);
-    res.status(201).send(result);
+    !result ? new Error() : res.status(201).send(result);
   } catch (error) {
     res.status(404).send(error);
+    throw new Error(error);
+  }
+});
+
+app.patch("/tasks/:taskId", async (req, res) => {
+  try {
+    const id = req.params.taskId;
+    const modelInstance = await main("tasks", taskSchema);
+    const result = await modelInstance.findOneAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    !result ? new Error() : res.status(201).send(result);
+  } catch (error) {
     throw new Error(error);
   }
 });
