@@ -24,25 +24,28 @@ router.post("/tasks", (req, res) => {
     .catch((error) => res.status(400).send(error));
 });
 
-router.patch("/tasks/:taskId", async (req, res) => {
-  const updates = Object.entries(req.body);
-  const allowedUpdates = ["email", "password", "task", "completed"];
-  const updateIsAllowed = updates.every((update) =>
-    allowedUpdates.includes(update)
-  );
-
-  if (!updateIsAllowed) {
-    return res.status(400).send("Error: Invalid update");
-  }
-
+router.patch("/tasks/:id", async (req, res) => {
   try {
-    const id = req.params.taskId;
+    const updates = Object.entries(req.body);
+    const allowedUpdates = ["task", "completed"];
+    const updateIsAllowed = updates.every((update) =>
+      allowedUpdates.includes(update)
+    );
+
+    if (!updateIsAllowed) {
+      return res.status(400).send(new Error("Error: Invalid update"));
+    }
+
+    const id = req.params.id;
     const modelInstance = await main("tasks", taskSchema);
-    const result = await modelInstance.findOneAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    !result ? new Error() : res.status(201).send(result);
+
+    const result = await modelInstance.findById(id);
+    updates.forEach((update) => (result[update] = req.body[update]));
+    await result.save();
+
+    !result
+      ? res.status(404).send(new Error("Not Found"))
+      : res.status(201).send(result);
   } catch (error) {
     throw new Error(error);
   }
