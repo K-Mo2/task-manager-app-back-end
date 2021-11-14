@@ -20,6 +20,12 @@ This is a project to practice the MongoDB with Mongoose
 
 3- Robo 3t
 
+4- Node.js
+
+5- Express
+
+6- Postman
+
 ## Skills practised
 
 1- Setting up Mongoose
@@ -33,3 +39,11 @@ This is a project to practice the MongoDB with Mongoose
 5- Data validation with Mongoose
 
 6- Data sanitization with Mongoose
+
+7- CRUD operations async
+
+8- Routing with express router
+
+9- REST API
+
+10- Testing with Postman
