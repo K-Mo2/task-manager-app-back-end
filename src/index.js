@@ -83,6 +83,14 @@ app.delete("/tasks", async (req, res) => {
 });
 
 app.patch("/tasks/:taskId", async (req, res) => {
+  const updates = Object.entries(req.body);
+  const allowedUpdates = ["email", "password", "task", "completed"];
+  const updateIsAllowed = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+  if (!updateIsAllowed) {
+    return res.status(400).send("Error: Invalid update");
+  }
   try {
     const id = req.params.taskId;
     const modelInstance = await main("tasks", taskSchema);
