@@ -14,7 +14,7 @@ router.get("/users", async (req, res) => {
   }
 });
 
-router.post("/users", async (req, res) => {
+router.post("/users/signup", async (req, res) => {
   try {
     const objInstance = await main("users", userSchema, req.body);
     const result = await objInstance.save();
