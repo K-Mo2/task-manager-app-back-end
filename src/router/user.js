@@ -1,17 +1,12 @@
 const userSchema = require("../models/users");
 const { main } = require("../database/mongoose");
 const express = require("express");
+const auth = require("../middleware/auth");
 
 const router = new express.Router();
 
-router.get("/users", async (req, res) => {
-  try {
-    const objInstance = await main("users", userSchema);
-    const result = await objInstance.find();
-    !result ? new Error("Error") : res.status(201).send(result);
-  } catch (error) {
-    throw new Error(error);
-  }
+router.get("/users/me", auth, async (req, res) => {
+  res.status(201).send(req.user);
 });
 
 router.post("/users/signup", async (req, res) => {
