@@ -26,6 +26,12 @@ This is a project to practice the MongoDB with Mongoose
 
 6- Postman
 
+7- Bcrypt
+
+8- JWT
+
+9- Express Middleware
+
 ## Skills practised
 
 1- Setting up Mongoose
@@ -49,3 +55,7 @@ This is a project to practice the MongoDB with Mongoose
 10- Testing with Postman
 
 11- Handling request status and bad requests
+
+12- Hashing passwords with Bcrypt
+
+13- Generating JWT for users
