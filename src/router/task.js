@@ -1,6 +1,7 @@
 const { main } = require("../database/mongoose");
 const taskSchema = require("../models/tasks");
 const express = require("express");
+const { model } = require("mongoose");
 
 const router = new express.Router();
 
@@ -26,26 +27,26 @@ router.post("/tasks", (req, res) => {
 
 router.patch("/tasks/:id", async (req, res) => {
   try {
-    const updates = Object.entries(req.body);
+    const updates = Object.keys(req.body);
     const allowedUpdates = ["task", "completed"];
-    const updateIsAllowed = updates.every((update) =>
-      allowedUpdates.includes(update)
-    );
-
+    const updateIsAllowed = updates.every((update) => {
+      return allowedUpdates.includes(update);
+    });
     if (!updateIsAllowed) {
-      return res.status(400).send(new Error("Error: Invalid update"));
+      return res.status(400).send("Error: Invalid update");
     }
 
     const id = req.params.id;
     const modelInstance = await main("tasks", taskSchema);
-
     const result = await modelInstance.findById(id);
     updates.forEach((update) => (result[update] = req.body[update]));
     await result.save();
 
-    !result
-      ? res.status(404).send(new Error("Not Found"))
-      : res.status(201).send(result);
+    if (!result) {
+      res.status(404).send(new Error("Not Found"));
+    }
+
+    res.status(201).send(result);
   } catch (error) {
     throw new Error(error);
   }
