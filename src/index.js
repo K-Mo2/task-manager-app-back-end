@@ -11,6 +11,16 @@ app.listen(port, () => {
   console.log("http://localhost:" + port);
 });
 
+app.use((req, res, next) => {
+  console.log(req.method, req.path);
+
+  if (req.method === "GET") {
+    res.status(503).send("maintenance mode");
+  }
+  res.status(201).send("successful request");
+  next();
+});
+
 app.use(express.json());
 
 app.use(userRouter);
