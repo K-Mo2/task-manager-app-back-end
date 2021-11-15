@@ -7,7 +7,7 @@ const router = new express.Router();
 router.get("/users", async (req, res) => {
   try {
     const objInstance = await main("users", userSchema);
-    const result = await objInstance.find(req.body);
+    const result = await objInstance.find();
     !result ? new Error("Error") : res.status(201).send(result);
   } catch (error) {
     throw new Error(error);
