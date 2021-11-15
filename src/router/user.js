@@ -14,13 +14,33 @@ router.get("/users", async (req, res) => {
   }
 });
 
-router.post("/users", (req, res) => {
-  main("users", userSchema, req.body)
-    .then((data) => {
-      data.save();
-      res.status(201).send(data);
-    })
-    .catch((error) => res.status(400).send(error));
+router.post("/users", async (req, res) => {
+  try {
+    const objInstance = await main("users", userSchema, req.body);
+    const result = await objInstance.save();
+    res.status(201).send(result);
+  } catch (error) {
+    res.status(404).send(error);
+
+    throw new Error(error);
+  }
+});
+
+router.post("/users/login", async (req, res) => {
+  try {
+    const objInstance = await main("users", userSchema);
+    const result = await objInstance.findByCredentials(
+      req.body.email,
+      req.body.password
+    );
+    if (!result) {
+      return res.status(404).send("Failed to login");
+    }
+
+    res.status(201).send(result);
+  } catch (error) {
+    return res.status(404).send(new Error(error));
+  }
 });
 
 router.patch("/users/:userId", async (req, res) => {
