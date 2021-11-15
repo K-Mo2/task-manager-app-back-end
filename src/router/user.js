@@ -24,8 +24,8 @@ router.post("/users", (req, res) => {
 });
 
 router.patch("/users/:userId", async (req, res) => {
-  const updates = Object.entries(req.body);
-  const allowedUpdates = ["email", "password", "task", "completed"];
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["email", "password"];
   const updateIsAllowed = updates.every((update) =>
     allowedUpdates.includes(update)
   );
@@ -37,10 +37,8 @@ router.patch("/users/:userId", async (req, res) => {
   try {
     const id = req.params.userId;
     const modelInstance = await main("users", userSchema);
-    const result = await modelInstance.findOneAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const result = await modelInstance.findById(id);
+    updates.forEach((update) => (result[update] = req.body[update]));
     !result ? new Error() : res.status(201).send(result);
   } catch (error) {
     throw new Error(error);
