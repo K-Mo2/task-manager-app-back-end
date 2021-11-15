@@ -18,7 +18,9 @@ router.post("/users/signup", async (req, res) => {
   try {
     const objInstance = await main("users", userSchema, req.body);
     const result = await objInstance.save();
-    res.status(201).send(result);
+    const token = await result.generateAuthToken();
+
+    res.status(201).send({ result, token });
   } catch (error) {
     res.status(404).send(error);
 
