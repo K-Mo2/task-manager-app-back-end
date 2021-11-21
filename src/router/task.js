@@ -1,10 +1,11 @@
 const { main } = require("../database/mongoose");
 const taskSchema = require("../models/tasks");
 const express = require("express");
+const auth = require("../middleware/auth");
 
 const router = new express.Router();
 
-router.get("/tasks", (req, res) => {
+router.get("/tasks", auth, (req, res) => {
   main("tasks", taskSchema).then((data) => {
     data.find({}).then((result) => {
       if (!result) {
@@ -15,8 +16,8 @@ router.get("/tasks", (req, res) => {
   });
 });
 
-router.post("/tasks", (req, res) => {
-  main("tasks", taskSchema, req.body)
+router.post("/tasks", auth, (req, res) => {
+  main("tasks", taskSchema, { ...req.body, owner: req.user._id })
     .then((data) => {
       data.save();
       res.status(201).send(data);
