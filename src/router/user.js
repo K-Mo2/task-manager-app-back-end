@@ -66,6 +66,16 @@ router.post("/users/logoutAll", auth, async (req, res) => {
 });
 
 router.patch("/users/me", auth, async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["email", "password", "name", "age"];
+  const isValidUpdate = updates.every((update) => {
+    return allowedUpdates.includes(update);
+  });
+
+  if (!isValidUpdate) {
+    return res.status(400).send("Error: Invalid update");
+  }
+
   try {
     req.user.email = req.body.email;
     req.user.password = req.body.password;
