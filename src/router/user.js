@@ -65,24 +65,14 @@ router.post("/users/logoutAll", auth, async (req, res) => {
   }
 });
 
-router.patch("/users/:userId", async (req, res) => {
-  const updates = Object.keys(req.body);
-  const allowedUpdates = ["email", "password"];
-  const updateIsAllowed = updates.every((update) =>
-    allowedUpdates.includes(update)
-  );
-
-  if (!updateIsAllowed) {
-    return res.status(400).send("Error: Invalid update");
-  }
-
+router.patch("/users/me", auth, async (req, res) => {
   try {
-    const id = req.params.userId;
-    const modelInstance = await main("users", userSchema);
-    const result = await modelInstance.findById(id);
-    updates.forEach((update) => (result[update] = req.body[update]));
-    !result ? new Error() : res.status(201).send(result);
+    req.user.email = req.body.email;
+    req.user.password = req.body.password;
+    await req.user.save();
+    res.status(201).send(req.user);
   } catch (error) {
+    res.status(404).send(error);
     throw new Error(error);
   }
 });
