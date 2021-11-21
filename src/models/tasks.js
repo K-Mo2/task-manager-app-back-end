@@ -9,6 +9,10 @@ const taskSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 });
 
 module.exports = taskSchema;
