@@ -1,7 +1,6 @@
 const { main } = require("../database/mongoose");
 const taskSchema = require("../models/tasks");
 const express = require("express");
-const { model } = require("mongoose");
 
 const router = new express.Router();
 

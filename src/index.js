@@ -1,5 +1,4 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const userRouter = require("./router/user");
 const taskRouter = require("./router/task");
 
@@ -16,11 +15,3 @@ app.use(express.json());
 app.use(userRouter);
 
 app.use(taskRouter);
-
-const myFunction = async () => {
-  const token = jwt.sign({ _id: "abd123" }, "secret", { expiresIn: "7 days" });
-  console.log(token);
-
-  const data = jwt.verify(token, "secret");
-  console.log(data);
-};
