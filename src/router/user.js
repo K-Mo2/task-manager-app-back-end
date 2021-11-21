@@ -87,11 +87,10 @@ router.patch("/users/:userId", async (req, res) => {
   }
 });
 
-router.delete("/users", async (req, res) => {
+router.delete("/users/me", auth, async (req, res) => {
   try {
-    const modelInstance = await main("users", userSchema);
-    const result = await modelInstance.findOneAndDelete(req.body);
-    res.status(201).send(result);
+    await req.user.remove();
+    res.status(201).send(req.user);
   } catch (error) {
     res.status(404).send(error);
     throw new Error(error);
