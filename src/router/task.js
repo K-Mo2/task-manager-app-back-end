@@ -5,9 +5,9 @@ const auth = require("../middleware/auth");
 
 const router = new express.Router();
 
-router.get("/tasks", auth, (req, res) => {
+router.get("/tasks/me", auth, (req, res) => {
   main("tasks", taskSchema).then((data) => {
-    data.find({}).then((result) => {
+    data.find({ owner: req.user._id }).then((result) => {
       if (!result) {
         res.status(404).send("Not Found");
       }
