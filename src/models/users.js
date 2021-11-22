@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const { main } = require("../database/mongoose");
 const jwt = require("jsonwebtoken");
+const taskSchema = require("./tasks");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -76,6 +77,13 @@ userSchema.pre("save", async function (next) {
     user.password = await bcrypt.hash(user.password, 8);
   }
 
+  next();
+});
+
+userSchema.pre("remove", async function (next) {
+  const user = this;
+  const modelInstance = await main("tasks", taskSchema);
+  const result = await modelInstance.deleteMany({ owner: user._id });
   next();
 });
 module.exports = userSchema;
