@@ -7,12 +7,14 @@ const router = new express.Router();
 
 router.get("/tasks", auth, (req, res) => {
   main("tasks", taskSchema).then((data) => {
-    data.find({ owner: req.user._id }).then((result) => {
-      if (!result) {
-        res.status(404).send("Not Found");
-      }
-      res.status(201).send(result);
-    });
+    data
+      .find({ owner: req.user._id, completed: req.query.completed })
+      .then((result) => {
+        if (!result) {
+          res.status(404).send("Not Found");
+        }
+        res.status(201).send(result);
+      });
   });
 });
 
