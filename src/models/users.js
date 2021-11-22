@@ -4,35 +4,43 @@ const { main } = require("../database/mongoose");
 const jwt = require("jsonwebtoken");
 const taskSchema = require("./tasks");
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-    validate(value) {
-      if (!value.includes("@" && ".com")) {
-        throw new Error("Error: Invalid Email");
-      }
-    },
-  },
-  password: {
-    type: String,
-    required: true,
-    validate(value) {
-      if (value.trim().length < 6 || value.toLowerCase().includes("password")) {
-        throw new Error("Error: Invalid Password");
-      }
-    },
-  },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
+const userSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      validate(value) {
+        if (!value.includes("@" && ".com")) {
+          throw new Error("Error: Invalid Email");
+        }
       },
     },
-  ],
-});
+    password: {
+      type: String,
+      required: true,
+      validate(value) {
+        if (
+          value.trim().length < 6 ||
+          value.toLowerCase().includes("password")
+        ) {
+          throw new Error("Error: Invalid Password");
+        }
+      },
+    },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
 userSchema.methods.toJSON = async function () {
   user = this;
