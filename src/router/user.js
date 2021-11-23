@@ -2,6 +2,7 @@ const userSchema = require("../models/users");
 const { main } = require("../database/mongoose");
 const express = require("express");
 const auth = require("../middleware/auth");
+const multer = require("multer");
 
 const router = new express.Router();
 
@@ -95,6 +96,12 @@ router.delete("/users/me", auth, async (req, res) => {
     res.status(404).send(error);
     throw new Error(error);
   }
+});
+const upload = multer({
+  dest: "images",
+});
+router.post("/users/me/avatar", upload.single("upload"), (req, res) => {
+  res.send();
 });
 
 module.exports = router;
