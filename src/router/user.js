@@ -108,6 +108,7 @@ const upload = multer({
     cb(undefined, true);
   },
 });
+
 router.post(
   "/users/me/avatar",
   auth,
@@ -121,5 +122,11 @@ router.post(
     res.status(404).send({ error: error.message });
   }
 );
+
+router.delete("users/me/avatar", auth, async (req, res) => {
+  req.user.avatar = undefined;
+  await req.user.save();
+  res.send();
+});
 
 module.exports = router;
