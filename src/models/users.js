@@ -52,6 +52,7 @@ userSchema.methods.toJSON = async function () {
 
   delete userObject.password;
   delete userObject.tokens;
+  delete userObject.avatar;
 
   return userObject;
 };
