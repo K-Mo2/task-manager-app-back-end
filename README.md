@@ -10,7 +10,7 @@
 
 ### Overview
 
-This is a project to practice the MongoDB with Mongoose
+This is a project to practice the MongoDB, Mongoose, Node, Express
 
 ## Technologies used
 
@@ -31,6 +31,10 @@ This is a project to practice the MongoDB with Mongoose
 8- JWT
 
 9- Express Middleware
+
+10- Multer npm package
+
+11- Sharp npm package
 
 ## Skills practised
 
@@ -59,3 +63,7 @@ This is a project to practice the MongoDB with Mongoose
 12- Hashing passwords with Bcrypt
 
 13- Generating JWT for users
+
+14- Multer npm package
+
+15- Sharp npm package

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const url = "mongodb://localhost:27017/task-manager-database";
+const url = process.env.DATABASE_URL;
 
 async function main(schemaName, schema, data) {
   await mongoose.connect(url);
