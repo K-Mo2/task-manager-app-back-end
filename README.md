@@ -36,6 +36,10 @@ This is a project to practice the MongoDB, Mongoose, Node, Express
 
 11- Sharp npm package
 
+12- .env
+
+13- Jest
+
 ## Skills practised
 
 1- Setting up Mongoose
@@ -67,3 +71,7 @@ This is a project to practice the MongoDB, Mongoose, Node, Express
 14- Multer npm package
 
 15- Sharp npm package
+
+16 - Environement variables
+
+17 - Automated testing with Jest
