@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 
-const url = process.env.DATABASE_URL;
-
+const connectionParams = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 async function main(schemaName, schema, data) {
-  await mongoose.connect(url);
+  await mongoose.connect(process.env.DATABASE_URL, connectionParams);
 
   const Model = mongoose.model(`${schemaName}`, schema);
 
