@@ -8,6 +8,8 @@
 
 \*[Skills practised](#skills-practised)
 
+\*[Launch method](#launch-method)
+
 ### Overview
 
 This is a project to practice the MongoDB, Mongoose, Node, Express
@@ -75,3 +77,24 @@ This is a project to practice the MongoDB, Mongoose, Node, Express
 16 - Environement variables
 
 17 - Automated testing with Jest
+
+### Launch method
+
+1- First install Node.js and Mongodb
+
+2- If you want to launch the app localy, you should lauch your mongodb server by running the following command in your terminal
+
+```
+mongod
+```
+
+3- If you want to run the app on Mongodb Atlas you should replace the local uri of mongodb with your cloud Mongodb Atlas and then run the follwing commands
+
+```
+npm install
+
+npm start
+
+```
+
+4- Finally you can test this app either with Postman or by connecting it to a front-end app
