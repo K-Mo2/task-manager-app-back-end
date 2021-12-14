@@ -1,4 +1,4 @@
-## MongoDB-Mongoose-Practice
+## Task-Manager-App
 
 ### Table of content
 
@@ -12,7 +12,17 @@
 
 ### Overview
 
-This is a project to practice the MongoDB, Mongoose, Node, Express
+This is a task manager app where the user can:
+
+1- Create an account using valid email and password, the data entered is validated and then the password is hashed and salted to increase security, thus a JWT (Json Web Token) is created for the user which is used thereafter for authentication and authorization.
+
+2- Users can create a profile by providing their email, password, email and password.
+
+3- Authenticated users can create, update and delete tasks as they desire.
+
+4- Authenticated users can also upload an avatar image for their profile which is validated therefore resized ,cropped and transformed to png before upload using a middleware.
+
+5- Users can signup, login and logout.
 
 ## Technologies used
 
@@ -38,7 +48,7 @@ This is a project to practice the MongoDB, Mongoose, Node, Express
 
 11- Sharp npm package
 
-12- .env
+12- Environment variables
 
 13- Jest
 
@@ -56,7 +66,7 @@ This is a project to practice the MongoDB, Mongoose, Node, Express
 
 6- Data sanitization with Mongoose
 
-7- CRUD operations async
+7- Async CRUD operations
 
 8- Routing with express router
 
@@ -66,7 +76,7 @@ This is a project to practice the MongoDB, Mongoose, Node, Express
 
 11- Handling request status and bad requests
 
-12- Hashing passwords with Bcrypt
+12- Hashing and salting passwords with Bcrypt
 
 13- Generating JWT for users
 
@@ -80,21 +90,34 @@ This is a project to practice the MongoDB, Mongoose, Node, Express
 
 ### Launch method
 
-1- First install Node.js and Mongodb
+1- Download the project, or clone it by runnig the following command in your terminal:
 
-2- If you want to launch the app localy, you should lauch your mongodb server by running the following command in your terminal
+```
+git clone https://github.com/K-Mo2/task-manager-app.git
+```
+
+2- Install Node.js and Mongodb
+
+3- If you want to launch the app localy, you should launch your mongodb server by running the following command in your terminal
 
 ```
 mongod
 ```
 
-3- If you want to run the app on Mongodb Atlas you should replace the local uri of mongodb with your cloud Mongodb Atlas and then run the follwing commands
+4- In another terminal tab run the follwing commands:
 
 ```
 npm install
 
 npm start
+```
 
+5- If you want to run the app on the Mongodb Atlas cloud you should replace the local url of mongodb with your cloud Mongodb Atlas url and then run the follwing commands
+
+```
+npm install
+
+npm start
 ```
 
 4- Finally you can test this app either with Postman or by connecting it to a front-end app
