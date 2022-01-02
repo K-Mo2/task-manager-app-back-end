@@ -121,3 +121,25 @@ npm start
 ```
 
 4- Finally you can test this app either with Postman or by connecting it to a front-end app
+
+# Instructions for the hosted version
+
+### Open Postman or any (API designing and testing tool) and send the following requests (in the following order):
+
+- Users routes 
+
+1- Signup route for registering a new user: "{{url}}/users/signup" (Post request)
+
+2- Login route for logging the user in using a bearer JWT (JavascriptWebToken) in the Authorization section in Postman:
+"{{url}/users/login" (Post request)
+
+3- Me route which is a dashboard to show the users personal info and their tasks: "{{url}}/users/me" (Get request)
+
+4- Logout route for loggin the user out : "{{url}}/users/logout" (Post request)
+
+5- LogoutAll route for loggin all users out : "{{url}}/users/logoutAll" (Post request)
+
+6- Me route to update the users personal info [email, password, name,age] (in lower case): 
+"{{url}}/users/me" (Patch request)
+
+7- Me route to delete the user: "{{url}}/users/me" (Delete request)
