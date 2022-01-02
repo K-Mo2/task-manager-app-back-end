@@ -145,6 +145,8 @@ NOTE ! : The body of the request has to have the following model for the databas
 
 - After that you will receive a Bearer JWT, use it to login in the Authorization section in Postman
 
+- The `{{url}}` in all the routes is `https://task-manger-app-back-end.herokuapp.com`
+
 1- Signup route for registering a new user: `"{{url}}/users/signup" ` (Post request)
 
 2- Login route for logging the user in using a bearer JWT (JavascriptWebToken) in the Authorization section in Postman:
