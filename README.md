@@ -134,7 +134,7 @@ npm start
 
 NOTE ! : The body of the request has to have the following model for the database validation
 
-- When signing up the user has to provide the following fields in lower case as JSON in the (raw) field of the body request in post man and then add the value for example:
+- When signing up the user has to provide the following fields in lowercase as JSON in the (raw) field of the body request in Postman and then add the value for example:
 
 ```
 {
@@ -145,27 +145,27 @@ NOTE ! : The body of the request has to have the following model for the databas
 
 - After that you will receive a Bearer JWT, use it to login in the Authorization section in Postman
 
-1- Signup route for registering a new user: "{{url}}/users/signup" (Post request)
+1- Signup route for registering a new user: `"{{url}}/users/signup" ` (Post request)
 
 2- Login route for logging the user in using a bearer JWT (JavascriptWebToken) in the Authorization section in Postman:
-"{{url}/users/login" (Post request)
+`"{{url}}/users/login"` (Post request)
 
-3- Me route which is a dashboard to show the users personal info and their tasks: "{{url}}/users/me" (Get request)
+3- Me route which is a dashboard to show the users personal info and their tasks: `"{{url}}/users/me"` (Get request)
 
-4- Logout route for loggin the user out : "{{url}}/users/logout" (Post request)
+4- Logout route for loggin the user out : `"{{url}}/users/logout"` (Post request)
 
-5- LogoutAll route for loggin all users out : "{{url}}/users/logoutAll" (Post request)
+5- LogoutAll route for loggin all users out : `"{{url}}/users/logoutAll"` (Post request)
 
 6- Me route to update the users personal info [email, password, name,age] (in lower case):
-"{{url}}/users/me" (Patch request)
+`"{{url}}/users/me"` (Patch request)
 
-7- Me route to delete the user: "{{url}}/users/me" (Delete request)
+7- Me route to delete the user: `"{{url}}/users/me"` (Delete request)
 
-8- Avatar route for uploading an avatar image : "{{url}}/users/me/avatar" (Post request)
+8- Avatar route for uploading an avatar image : `"{{url}}/users/me/avatar"` (Post request)
 
-8- Avatar route for deleting an avatar image : "{{url}}/users/me/avatar" (Delete request)
+9- Avatar route for deleting an avatar image : `"{{url}}/users/me/avatar"` (Delete request)
 
-8- Avatar route for getting an avatar image by user's id: "{{url}}/users/:id/avatar" (Get request)
+10- Avatar route for getting an avatar image by user's id: `"{{url}}/users/:id/avatar"` (Get request)
 
 ### Tasks routes
 
@@ -178,10 +178,10 @@ Note !: The body of the request has to have the following model for the database
 }
 ```
 
-1- Tasks route to get all the tasks only for the authorized user: "{{url}}/tasks" (Get request)
+1- Tasks route to get all the tasks only for the authorized user: `"{{url}}/tasks"` (Get request)
 
-2- Tasks route to post tasks only for the authorized user: "{{url}}/tasks" (Post request)
+2- Tasks route to post tasks only for the authorized user: `"{{url}}/tasks"` (Post request)
 
-3- Tasks route to update a task by its id only for the authorized user: "{{url}}/tasks/:id" (Patch request)
+3- Tasks route to update a task by its id only for the authorized user: `"{{url}}/tasks/:id"` (Patch request)
 
-4- Tasks route to delete a task by its id only for the authorized user: "{{url}}/tasks/:id" (Delete request)
+4- Tasks route to delete a task by its id only for the authorized user: `"{{url}}/tasks/:id"` (Delete request)
