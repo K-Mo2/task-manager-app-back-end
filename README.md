@@ -16,13 +16,15 @@ This is a task manager app where the user can:
 
 1- Create an account using valid email and password, the data entered is validated and then the password is hashed and salted to increase security, thus a JWT (Json Web Token) is created for the user which is used thereafter for authentication and authorization.
 
-2- Users can create a profile by providing their email, password, email and password.
+2- Users can create a profile by providing their email, password, name and age.
 
 3- Authenticated users can create, update and delete tasks as they desire.
 
 4- Authenticated users can also upload an avatar image for their profile which is validated therefore resized ,cropped and transformed to png before upload using a middleware.
 
 5- Users can signup, login and logout.
+
+6- It's also availabe to log all the users out say by the admin for example
 
 ## Technologies used
 
@@ -128,7 +130,20 @@ npm start
 
 ### Open Postman or any (API designing and testing tool) and send the following requests (in the following order):
 
-- Users routes
+### Users routes
+
+NOTE ! : The body of the request has to have the following model for the database validation
+
+- When signing up the user has to provide the following fields in lower case as JSON in the (raw) field of the body request in post man and then add the value for example:
+
+```
+{
+    "email":"yourEmail@example.com",
+    "password":"your password more than 6 digits"
+}
+```
+
+- After that you will receive a Bearer JWT, use it to login in the Authorization section in Postman
 
 1- Signup route for registering a new user: "{{url}}/users/signup" (Post request)
 
@@ -150,4 +165,23 @@ npm start
 
 8- Avatar route for deleting an avatar image : "{{url}}/users/me/avatar" (Delete request)
 
-8- Avatar route for getting an avatar image : "{{url}}/users/:id/avatar" (Get request)
+8- Avatar route for getting an avatar image by user's id: "{{url}}/users/:id/avatar" (Get request)
+
+### Tasks routes
+
+Note !: The body of the request has to have the following model for the database validation
+
+```
+{
+"task":"user's task here",
+"completed":"boolean (true or false)"
+}
+```
+
+1- Tasks route to get all the tasks only for the authorized user: "{{url}}/tasks" (Get request)
+
+2- Tasks route to post tasks only for the authorized user: "{{url}}/tasks" (Post request)
+
+3- Tasks route to update a task by its id only for the authorized user: "{{url}}/tasks/:id" (Patch request)
+
+4- Tasks route to delete a task by its id only for the authorized user: "{{url}}/tasks/:id" (Delete request)
