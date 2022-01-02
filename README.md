@@ -84,9 +84,11 @@ This is a task manager app where the user can:
 
 15- Sharp npm package
 
-16 - Environement variables
+16- Environement variables
 
-17 - Automated testing with Jest
+17- Automated testing with Jest
+
+18- File upload
 
 ### Launch method
 
@@ -126,7 +128,7 @@ npm start
 
 ### Open Postman or any (API designing and testing tool) and send the following requests (in the following order):
 
-- Users routes 
+- Users routes
 
 1- Signup route for registering a new user: "{{url}}/users/signup" (Post request)
 
@@ -139,7 +141,13 @@ npm start
 
 5- LogoutAll route for loggin all users out : "{{url}}/users/logoutAll" (Post request)
 
-6- Me route to update the users personal info [email, password, name,age] (in lower case): 
+6- Me route to update the users personal info [email, password, name,age] (in lower case):
 "{{url}}/users/me" (Patch request)
 
 7- Me route to delete the user: "{{url}}/users/me" (Delete request)
+
+8- Avatar route for uploading an avatar image : "{{url}}/users/me/avatar" (Post request)
+
+8- Avatar route for deleting an avatar image : "{{url}}/users/me/avatar" (Delete request)
+
+8- Avatar route for getting an avatar image : "{{url}}/users/:id/avatar" (Get request)
